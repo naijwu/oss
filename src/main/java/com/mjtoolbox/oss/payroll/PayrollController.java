@@ -25,9 +25,16 @@ public class PayrollController {
                 .collect(Collectors.toList());
     }
 
+    // Retrieve payrolls for a teacher_id
+    @GetMapping("/teachers/{teacher_id}/payrolls")
+    public List<Payroll> retrieveAllPayrollsByTeacher(@PathVariable long teacher_id){
+       return StreamSupport.stream(payrollRepository.findByTeacher(teacherRepository.findById(teacher_id).get()).spliterator(), false)
+               .collect(Collectors.toList());
+    }
+
     @GetMapping("/payrolls/{id}")
     public Payroll findById(@PathVariable long id){
-        return payrollRepository.findById( id)
+        return payrollRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Payroll not found with ID: " + id));
     }
 
@@ -44,7 +51,7 @@ public class PayrollController {
 
     // Update payroll by payroll_id
     @PutMapping("/payrolls/{id}")
-    public Payroll updatePayroll( @PathVariable long id, @Valid @RequestBody Payroll payroll){
+    public Payroll updatePayroll(@PathVariable long id, @Valid @RequestBody Payroll payroll){
         Payroll payrollFromDB = payrollRepository.findById( id)
                 .orElseThrow(()-> new ResourceNotFoundException("Payroll not found with ID: " + id));
         payrollFromDB.setHourly_rate(payroll.getHourly_rate());
@@ -55,8 +62,8 @@ public class PayrollController {
 
     @DeleteMapping("/payrolls/{id}")
     public void delete(@PathVariable long id){
-        payrollRepository.findById( id)
+        payrollRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Teacher not found with ID: " + id));
-        payrollRepository.deleteById( id);
+        payrollRepository.deleteById(id);
     }
 }
