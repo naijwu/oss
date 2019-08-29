@@ -16,26 +16,26 @@ public class TeacherController {
     TeacherRepository teacherRepository;
 
     @GetMapping("/teachers")
-    public List<Teacher> retrieveAllTeachers(){
+    public List<Teacher> retrieveAllTeachers() {
         return StreamSupport.stream(teacherRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/teachers/{id}")
-    public Teacher findById(@PathVariable long id){
-        return teacherRepository.findById( id)
-                .orElseThrow(()-> new ResourceNotFoundException("Teacher not found with ID: " + id));
+    @GetMapping("/teachers/{teacher_id}")
+    public Teacher findById(@PathVariable long teacher_id) {
+        return teacherRepository.findById(teacher_id)
+                .orElseThrow(() -> new ResourceNotFoundException("Teacher not found with ID: " + teacher_id));
     }
 
     @PostMapping("/teachers")
-    public Teacher createTeacher(@Valid @RequestBody Teacher teacher){
-        return teacherRepository.save( teacher);
+    public Teacher createTeacher(@Valid @RequestBody Teacher teacher) {
+        return teacherRepository.save(teacher);
     }
 
-    @PutMapping("/teachers/{id}")
-    public Teacher updateTeacher( @PathVariable long id, @Valid @RequestBody Teacher teacher){
-        Teacher teacherFromDB = teacherRepository.findById( id)
-                .orElseThrow(()-> new ResourceNotFoundException("Teacher not found with ID: " + id));
+    @PutMapping("/teachers/{teacher_id}")
+    public Teacher updateTeacher(@PathVariable long teacher_id, @Valid @RequestBody Teacher teacher) {
+        Teacher teacherFromDB = teacherRepository.findById(teacher_id)
+                .orElseThrow(() -> new ResourceNotFoundException("Teacher not found with ID: " + teacher_id));
         teacherFromDB.setCell_phone(teacher.getCell_phone());
         teacherFromDB.setEmail(teacher.getEmail());
         teacherFromDB.setHome_phone(teacher.getHome_phone());
@@ -49,10 +49,10 @@ public class TeacherController {
         return teacherRepository.save(teacherFromDB);
     }
 
-    @DeleteMapping("/teachers/{id}")
-    public void delete(@PathVariable long id){
-        teacherRepository.findById( id)
-                .orElseThrow(()-> new ResourceNotFoundException("Teacher not found with ID: " + id));
-        teacherRepository.deleteById( id);
+    @DeleteMapping("/teachers/{teacher_id}")
+    public void delete(@PathVariable long teacher_id) {
+        teacherRepository.findById(teacher_id)
+                .orElseThrow(() -> new ResourceNotFoundException("Teacher not found with ID: " + teacher_id));
+        teacherRepository.deleteById(teacher_id);
     }
 }
