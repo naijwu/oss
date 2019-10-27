@@ -27,12 +27,12 @@ public class TeacherController {
                 .orElseThrow(() -> new ResourceNotFoundException("Teacher not found with ID: " + teacher_id));
     }
 
-    @PostMapping("/teachers")
+    @PostMapping("/teachers") // create
     public Teacher createTeacher(@Valid @RequestBody Teacher teacher) {
         return teacherRepository.save(teacher);
     }
 
-    @PutMapping("/teachers/{teacher_id}")
+    @PutMapping("/teachers/{teacher_id}") // updates
     public Teacher updateTeacher(@PathVariable long teacher_id, @Valid @RequestBody Teacher teacher) {
         Teacher teacherFromDB = teacherRepository.findById(teacher_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Teacher not found with ID: " + teacher_id));

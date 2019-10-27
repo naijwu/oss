@@ -62,6 +62,7 @@ public class Teacher implements Serializable {
     @Setter(AccessLevel.NONE)
     private Date last_updated;
 
+    // One to Many relationship with payroll
     @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Payroll> payrolls = new HashSet<>();

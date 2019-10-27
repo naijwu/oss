@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@CrossOrigin()
-@RestController
+@CrossOrigin() // Rest & Spring will be running on different domains
+@RestController // Makes the class a REST API
 public class PayrollController {
-    @Resource
+    @Resource //
     PayrollRepository payrollRepository;
 
     @Resource
