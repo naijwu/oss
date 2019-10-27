@@ -48,8 +48,8 @@ public class Teacher implements Serializable {
     @Column(name = "postal_code")
     private String postal_code;
 
-    @Column(name = "subjects")
-    private String subjects;
+    @Column(name = "subject")
+    private String subject;
 
     @Column(name = "level")
     private int level;

@@ -43,9 +43,9 @@ public class TeacherController {
         teacherFromDB.setCity(teacher.getCity());
         teacherFromDB.setProvince(teacher.getProvince());
         teacherFromDB.setPostal_code(teacher.getPostal_code());
-        teacherFromDB.setSubjects(teacher.getSubjects());
+        teacherFromDB.setSubject(teacher.getSubject());
         teacherFromDB.setLevel(teacher.getLevel());
-        teacherFromDB.setSubjects(teacher.getSubjects());
+        teacherFromDB.setSubject(teacher.getSubject());
         return teacherRepository.save(teacherFromDB);
     }
 
